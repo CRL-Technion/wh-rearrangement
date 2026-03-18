@@ -2,14 +2,12 @@ cmake_minimum_required(VERSION 3.21)
 project(MAWR)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-Wall -Wextra -Wpedantic -Werror -gdwarf-4")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -Werror -Wno-error=maybe-uninitialized -gdwarf-4")
 set(CMAKE_CXX_FLAGS_RELEASE "-g -O3")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 
 find_package(Boost CONFIG COMPONENTS program_options)
 include_directories(${Boost_INCLUDE_DIRS})
-
-include_directories("/home/crl05/gurobi1201/linux64/include/")
 
 find_package(ortools REQUIRED)
 include_directories(${ORTOOLS_INCLUDE_DIRS})
@@ -27,4 +25,3 @@ add_executable(MAWR main.cpp
 
 target_link_libraries(MAWR ${Boost_LIBRARIES})
 target_link_libraries(MAWR ortools::ortools)
-
